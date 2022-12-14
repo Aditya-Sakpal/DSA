@@ -114,7 +114,7 @@ int main()
     display(head);
     deletion(head,2);
     // deletion(head,1);
-    // makeCycle(head,1);
+    makeCycle(head,1);
     detectloop(head);
     display(head);
 
