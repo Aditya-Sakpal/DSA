@@ -1,3 +1,11 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -10,85 +18,77 @@ class node{
         next=NULL;
     }
 };
-void insertAtHead(node* &head,int val){
-    node* n=new node(val);
-    n->next=head;
-    head=n;
-}
 
-void insertAtTail(node* &head,int val){
-    node* n=new node(val);
+void insert(node* &head,int val){
+    int x;
+    cout<<"Enter 0 for insertion of "<<val<<" at head or 1 for insertion "<<val<<" at tail";
+    cin>>x;
+    
+    if(x==0){
+        node* n=new node(val);
+        n->next=head;
+        head=n;
+    }
+    else if(x==1){
+        node* n=new node(val);
     if(head==NULL){
         head=n;
         return;
     }
-    
     node* temp=head;
     while(temp->next!=NULL){
         temp=temp->next;
     }
-    temp->next=n;
-}
-
-void deletion(node* &head,int val){
-    int x;
-    cout<<"Enter 0 to delete head or insert 1 to delete a node"<<endl;
-    cin>>x;
     
-    if(x==0){
-        if(head->data!=val){
-            cout<<"Its not a head bro";
-            exit(1);
-        }
-        node*del=head;
+    temp->next=n;
+    return;
+    }
+    else{
+        cout<<"Invalid input"<<endl;
+        return;
+    }
+    
+}
+void deletion(node* &head,int val){
+    
+    if(head->data==val){
+        node* del=head;
         head=head->next;
-        
         delete del;
         return;
     }
-    else if(x==1){
-    if(head->data==val){
-        cout<<"Its a head bruh ,plz select an appropriate option";
-        exit(1);
-    }    
+    
+    if(head->data!=val){
     node* temp=head;
     while(temp->next->data!=val){
         temp=temp->next;
     }
-    node* del =temp->next;
+    node* del=temp->next;
     temp->next=temp->next->next;
     
     delete del;
     return;
     }
-    else{
-        cout<<"Enter valid input";
-        return;
-    }
-    
 }
 
-void display(node* head){
+void display(node* &head){
     node* temp=head;
     while(temp!=NULL){
         cout<<temp->data<<"->";
         temp=temp->next;
     }
-    
     cout<<"NULL"<<endl;
 }
-
 int main()
 {
     node* head=NULL;
-    insertAtTail(head,1);
-    insertAtTail(head,2);
-    insertAtTail(head,3);
-    
-    insertAtHead(head,4);
+    insert(head,0);
+    insert(head,1);
+    insert(head,2);
     
     display(head);
-    deletion(head,4);
+    deletion(head,2);
+    deletion(head,1);
     display(head);
 
     return 0;
